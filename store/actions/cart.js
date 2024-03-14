@@ -8,3 +8,21 @@ export const addToCart = product => {
         }
     }
 }
+
+export const handlequantity = productId=>{
+    return{
+        type : "HANDLE_QUANTITY_FROM_CARTPRODUCT",
+        payload:{
+            productId:productId
+        }
+    }
+}
+
+export const removefromcart=productId=>{
+    return{
+        type:'REMOVE_ITEM',
+        payload:{
+            productId:productId
+        }
+    }
+}

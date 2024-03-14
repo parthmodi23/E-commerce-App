@@ -1,6 +1,6 @@
 import React from "react";
 import {View,Text,StyleSheet, Image,Button, Platform,TouchableOpacity,TouchableNativeFeedback} from 'react-native'
-import fonts from "../constants/fonts";
+import fonts from "../../constants/fonts";
 
 
 const ProductContainer=(props)=>{

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FlatList,View,Text,StyleSheet,Button } from "react-native";
 import { useSelector ,useDispatch} from "react-redux";
-import ProductContainer from "../../components/ProductContainer";
+import ProductContainer from "../../components/shop/ProductContainer";
 import { combineTransition } from "react-native-reanimated";
 import * as CartAction from '../../store/actions/cart'
 import {HeaderButtons, Item } from "react-navigation-header-buttons";

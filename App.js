@@ -9,15 +9,15 @@ import { enableScreens } from 'react-native-screens';
 import { useFonts } from 'expo-font';
 import logger from 'redux-logger';
 import cartReducer from './store/reducer/cart'
+import * as SplashScreen from 'expo-splash-screen';
 // import CardReducer from './store/reducer/cart'
 enableScreens();
+SplashScreen.preventAutoHideAsync();
 
 // // Combine reducers
 const rootReducer = combineReducers({
   products: ProductReducer,
   cart:cartReducer
-  
-
 });
 
 // Create Redux store
@@ -34,9 +34,9 @@ export default function App() {
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'), 
     'DancingScript-VariableFont_wght': require("./assets/fonts/DancingScript-VariableFont_wght.ttf") 
   });
-  // if (!fontLoaded) {
-  //   return <AppLoading />;
-  // }
+  if (!fontLoaded) {
+    return <AppLoading/>
+  }
 
   return (
       // {/* <Provider store={mystore}> */}

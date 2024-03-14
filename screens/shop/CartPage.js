@@ -2,8 +2,8 @@ import React from 'react'
 import { FlatList, View,Text,Button, StyleSheet} from 'react-native'
 import Colors from '../../constants/Colors'
 import { useSelector } from 'react-redux'
+import * as CartAction from '../../store/actions/cart'
 import CartItem from '../../components/shop/cartItem'
-
 
 
 const CartPage=props=>{
@@ -27,15 +27,18 @@ const CartPage=props=>{
         //this is used to sort the array based on the product Id
         return transformedCartItem;
     })
-    console.log(cartItem)
+    // console.log('hello')
 
-    const renderproductdata=()=>{
-       return <CartItem
-        image={cartItem.productImage} 
-        title={cartItem.productTitle} 
-        price={`${cartItem.productPrice}$`}
-        quantity={cartItem.quantity}
-          />
+
+    const renderproductdata=(itemdata)=>{
+        console.log(itemdata)
+       return (<CartItem
+        imageUrl={itemdata.productImage} 
+        title={itemdata.productTitle} 
+        price={itemdata.productPrice}
+        quantity={itemdata.quantity}
+        id={itemdata.productId}
+          />)
     }
 return(
 <View style={styles.Screen}>
@@ -53,7 +56,7 @@ Total : <Text style={styles.amount}>${carttotalamount.toFixed(2)}</Text>
     <Text>Details</Text>
     <FlatList 
     data={cartItem}
-    renderItem={renderproductdata}
+    renderItem={(itemdata)=>(renderproductdata(itemdata.item))}
     />
 </View>
 </View>)
@@ -67,10 +70,13 @@ const styles=StyleSheet.create({
     totalcontainer:{
         flexDirection:'row',
         backgroundColor:Colors.primary,
-        borderWidth:2,
+        borderWidth:1,
+        borderRadius:10,
         alignItems:'center',
         justifyContent:'space-between',
-        borderColor:Colors.alert
+        borderColor:'black',
+        overflow:'hidden'
+
     }
 })
 
