@@ -11,7 +11,9 @@ const productdata=useSelector(state=>state.products.availableProducts);
 const Dispatch=useDispatch();
 useEffect(()=>{
     props.navigation.setOptions({
-        headerRight:()=> <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
+        headerRight:()=> (
+        <View>
+        <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
         <Item title="cart"
         iconName="cart"
         onPress={()=>{
@@ -19,6 +21,17 @@ useEffect(()=>{
                 name:'Your Cart'})}}
         />
         </HeaderButtons>
+        </View>),
+        headerLeft:()=>{
+            return(
+    <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
+        <Item title="Menu"
+        iconName="menu"
+        onPress={()=>{
+            props.navigation.openDrawer()
+        }}/>
+    </HeaderButtons>
+    )}
     })
 })
     return(

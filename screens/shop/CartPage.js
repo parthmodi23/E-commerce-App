@@ -1,13 +1,13 @@
 import React from 'react'
 import { FlatList, View,Text,Button, StyleSheet} from 'react-native'
 import Colors from '../../constants/Colors'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as CartAction from '../../store/actions/cart'
 import CartItem from '../../components/shop/cartItem'
-
+import * as orderActions from '../../store/actions/orders'
 
 const CartPage=props=>{
-
+    const dispatch=useDispatch()
     const carttotalamount=useSelector(state=>state.cart.totalAmount)
     const cartItem = useSelector(state=>{
         const transformedCartItem =[];
@@ -47,7 +47,7 @@ return(
 Total : <Text style={styles.amount}>${carttotalamount.toFixed(2)}</Text>
 </Text>
     <Button title='Order Now' onPress={()=>{
-        console.log("order place sucessfully")
+        dispatch(orderActions.addOrder(cartItem,carttotalamount))
     }}
     disabled={cartItem.length===0}
 />

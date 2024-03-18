@@ -13,9 +13,9 @@ let TouchableComponents =TouchableOpacity
 
 <View style={styles.mainContainer}>
 
-    <View style={styles.imageContainer}>
+    {/* <View style={styles.imageContainer}> */}
     <Image style={styles.image} source={{uri:props.image}} />
-    </View>
+    {/* </View> */}
     <View style={styles.textContainer}>
     <Text style={styles.title}>{props.title}</Text>
     <Text style={styles.price}>${props.price.toFixed(2)}</Text>
@@ -47,8 +47,10 @@ const styles=StyleSheet.create({
         overflow:'hidden'
     },
     image:{
-        height:'100%',
+        height:'60%',
         width:'100%',
+        alignSelf:'center',
+        resizeMode:'contain'
     },
     title:{
         fontFamily:fonts.commonfonts

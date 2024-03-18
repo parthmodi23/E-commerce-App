@@ -10,6 +10,10 @@ import { useFonts } from 'expo-font';
 import logger from 'redux-logger';
 import cartReducer from './store/reducer/cart'
 import * as SplashScreen from 'expo-splash-screen';
+import orderReducer from './store/reducer/orders'
+import OrderScreen from './screens/shop/OrderScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 // import CardReducer from './store/reducer/cart'
 enableScreens();
 SplashScreen.preventAutoHideAsync();
@@ -17,7 +21,8 @@ SplashScreen.preventAutoHideAsync();
 // // Combine reducers
 const rootReducer = combineReducers({
   products: ProductReducer,
-  cart:cartReducer
+  cart:cartReducer,
+  orders:orderReducer,
 });
 
 // Create Redux store
@@ -43,10 +48,14 @@ export default function App() {
       //   {/* <NavigationContainer>
       //   </NavigationContainer> */}
       // {/* </Provider> */}
+  <GestureHandlerRootView style={{flex:1}}>
   <NavigationContainer>
-    <Provider store={mystore}>
+  <Provider store={mystore}>
   <ProductNavigator/>
+  <OrderScreen/>
   </Provider>
   </NavigationContainer>
+  </GestureHandlerRootView>
+
   );
 }

@@ -7,7 +7,7 @@ const ProductDetails=(props)=>{
     return(
 <View style={styles.mainContainer}>
     <View style={styles.imageContainer}>
-        <Image  style={styles.image} source={{uri:props.image}} />
+        <Image  thu style={styles.image} source={{uri:props.image}} />
     </View>
     <View style={styles.textContainer}>
         <Text style={styles.title}>{props.title}</Text>

@@ -1,23 +1,26 @@
 import CartItem from "../../Model/cartItem";
 const initialState={
     products:{},
-    totalAmount:0
+    totalAmount:0,
+    totalQuatity:0
 }
 
 export default (state=initialState,action)=>{
     switch(action.type){
         case 'ADD_TO_CART' : 
             const addedProduct=action.payload.product
+            console.log(addedProduct)
             const productPrice=addedProduct.price;
             const productTitle=addedProduct.title;
             const productImage=addedProduct.imageUrl
+            const productquantity =addedProduct.quantity
             let updatedorNewCartItem;
             if(state.products[addedProduct.id]){
                 //if item is already in the product
                 updatedorNewCartItem=new CartItem(
                     state.products[addedProduct.id].quantity+1,
                     productPrice,productTitle,productImage,
-                    state.products[addedProduct.id].sum+productPrice
+                    state.products[addedProduct.id].sum+productPrice,
                 )
                 
             }else{
@@ -26,7 +29,8 @@ export default (state=initialState,action)=>{
             return {
                     ...state,
                     products:{...state.products,[addedProduct.id]:updatedorNewCartItem},
-                    totalAmount:state.totalAmount+productPrice
+                    totalAmount:state.totalAmount+productPrice,
+                    totalQuatity:state.totalQuatity+productquantity
                 }
            
         case 'HANDLE_QUANTITY_FROM_CARTPRODUCT' :

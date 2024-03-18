@@ -4,10 +4,10 @@ import { View, Text, StyleSheet, Image,Button } from 'react-native'
 import { combineReducers } from "redux";
 import fonts from "../../constants/fonts";
 import { useDispatch } from "react-redux";
-import * as CartAction from '../../store/actions/cart'
+import * as CartAction from '../../store/actions/cart';
 import { AntDesign } from '@expo/vector-icons';
 
-const CartItem = props => {
+const CartItem = (props) => {
 
     const Dispatch=useDispatch()
     console.log(props)
@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
         borderWidth:1,
         flexDirection:'row',
         justifyContent:'space-between',
-        margin:5,
         overflow:'hidden',
         backgroundColor:'#ffff',
         elevation:5,
-
+        margin:5
     },
     imagecontainer:{
         height:100,
@@ -62,6 +61,7 @@ const styles = StyleSheet.create({
     image:{
         height:'100%',
         width:'100%',
+        resizeMode:'cover'
     },
     middlecontainer:{
         flexDirection:'row',
