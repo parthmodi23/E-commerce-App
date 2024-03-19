@@ -7,17 +7,22 @@ const ProductDetails=(props)=>{
     return(
 <View style={styles.mainContainer}>
     <View style={styles.imageContainer}>
-        <Image  thu style={styles.image} source={{uri:props.image}} />
+        <Image style={styles.image} source={{uri:props.image}} />
     </View>
     <View style={styles.textContainer}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.price}>${props.price.toFixed(2)}</Text>
     </View>
-    <View style={styles.button}>
-        <CustomeButton title='Buy Now' onPress={props.ViewDetails}/>
-        <CustomeButton title='Add To Cart' onPress={props.addtocart}/>
-    </View>
-    <View>
+   
+    <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={props.ViewDetails}>
+                        <Text style={styles.buttonText}>{props.buttonleft}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={props.addtocart}>
+                        <Text style={styles.buttonText}>{props.buttonright}</Text>
+                    </TouchableOpacity>
+                </View>
+    <View>   
         <Text style={styles.details}>{props.productDetails}</Text>
     </View>
 </View>       
@@ -60,6 +65,21 @@ const styles=StyleSheet.create({
     details:{
         fontFamily:fonts.commonfonts,
         margin:20
+    },
+    button: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor:'#d64d'
+    },
+    buttonText: {
+        color: 'white',
+        fontFamily: fonts.commonfonts
+    },
+    textContainer: {
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10
     }
 })
 

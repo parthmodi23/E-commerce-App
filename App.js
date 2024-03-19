@@ -13,6 +13,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import orderReducer from './store/reducer/orders'
 import OrderScreen from './screens/shop/OrderScreen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import UserProductPage from './screens/user/UserProductPage';
 
 // import CardReducer from './store/reducer/cart'
 enableScreens();
@@ -27,9 +28,6 @@ const rootReducer = combineReducers({
 
 // Create Redux store
 const mystore = createStore(rootReducer, applyMiddleware(logger)); // Apply logger middleware
-
-
-
 
 // App component
 export default function App() {
@@ -51,8 +49,7 @@ export default function App() {
   <GestureHandlerRootView style={{flex:1}}>
   <NavigationContainer>
   <Provider store={mystore}>
-  <ProductNavigator/>
-  <OrderScreen/>
+            <ProductNavigator/>
   </Provider>
   </NavigationContainer>
   </GestureHandlerRootView>

@@ -9,6 +9,7 @@ import * as orderActions from '../../store/actions/orders'
 const CartPage=props=>{
     const dispatch=useDispatch()
     const carttotalamount=useSelector(state=>state.cart.totalAmount)
+    console.log("ewffewgewg"+JSON.stringify(carttotalamount))
     const cartItem = useSelector(state=>{
         const transformedCartItem =[];
 

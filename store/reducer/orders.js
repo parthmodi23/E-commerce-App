@@ -9,11 +9,11 @@ export default (state=initialstate,action)=>{
             const newOrder=new Order(
             new Date().toString(),
             action.payload.orderData.items,
-            action.payload.orderData.price,
+            action.payload.orderData.amount,
             new Date());
          return {
         ...state,
-        orders:state.orders.concate(newOrder)
+        orders:state.orders.concat(newOrder)
         }
     default:
         return state

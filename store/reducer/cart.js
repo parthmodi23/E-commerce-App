@@ -77,6 +77,9 @@ export default (state=initialState,action)=>{
                     totalAmount:(state.totalAmount-(productdata.quantity*productdata.productPrice))
                 }
 
+            case 'ADD_ORDER':
+                return initialState
+            
             default:
                 return state
 
