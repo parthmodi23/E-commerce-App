@@ -6,6 +6,7 @@ import CartPage from "../screens/shop/CartPage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import OrderScreen from "../screens/shop/OrderScreen";
 import UserProductPage from "../screens/user/UserProductPage";
+import EditProductPage from "../screens/user/EditProductPAge";
 
 const Stack = createStackNavigator();
 const SideDrawer = createDrawerNavigator();
@@ -25,16 +26,17 @@ const OrderNavigator=()=>(
 )
 
 const Userproduct=()=>(
-  //use return insted
+  //use return insted ( )
   <Stack.Navigator>
-    <Stack.Screen name='userproduct' component={UserProductPage} options={{headerShown:false}} />
+    <Stack.Screen name='Your Products' component={UserProductPage} options={{headerShown:true}} />
+    <Stack.Screen name='Edit Product' component={EditProductPage} options={{headerShown:true}} />
   </Stack.Navigator>
 )
 const SideNavigator=()=>(
 <SideDrawer.Navigator>
 <SideDrawer.Screen name="MainScreen" component={ProductNavigator} options={{headerShown:false}}/>
 <SideDrawer.Screen name="Orders" component={OrderNavigator} options={{headerShown:true}}/>
-<SideDrawer.Screen name="admin" component={Userproduct} options={{headerShown:true}}/>
+<SideDrawer.Screen name="admin" component={Userproduct} options={{headerShown:false}}/>
 </SideDrawer.Navigator>
 )
 export default SideNavigator;

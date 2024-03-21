@@ -14,6 +14,7 @@ import orderReducer from './store/reducer/orders'
 import OrderScreen from './screens/shop/OrderScreen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import UserProductPage from './screens/user/UserProductPage';
+import ImageLoader from './components/shop/testImagecode';
 
 // import CardReducer from './store/reducer/cart'
 enableScreens();
@@ -49,7 +50,7 @@ export default function App() {
   <GestureHandlerRootView style={{flex:1}}>
   <NavigationContainer>
   <Provider store={mystore}>
-            <ProductNavigator/>
+          <ProductNavigator/>
   </Provider>
   </NavigationContainer>
   </GestureHandlerRootView>

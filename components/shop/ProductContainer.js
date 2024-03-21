@@ -9,7 +9,7 @@ const ProductContainer = (props) => {
         TouchableComponents = TouchableNativeFeedback
     }
     return (
-        <TouchableComponents onPress={props.ViewDetails} useforeground>
+        <TouchableComponents onPress={props.leftpress} useforeground>
 
             <View style={styles.mainContainer}>
 
@@ -18,7 +18,7 @@ const ProductContainer = (props) => {
                 {/* </View> */}
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{props.title}</Text>
-                    <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+                    <Text style={styles.price}>${props.price}</Text>
                 </View>
 
                 <View style={styles.buttonContainer}>

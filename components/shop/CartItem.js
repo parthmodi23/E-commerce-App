@@ -22,7 +22,7 @@ const CartItem = (props) => {
                 {props.title.length<11 ? props.title : props.title.substring(0,9)+'...'}
             </Text>
             <Text style={styles.price}>
-                {props.price}
+                ${props.price}
             </Text>
         <View style={styles.quantitycontainer}>
             <Button title='-' onPress={()=>Dispatch(CartAction.handlequantity(props.id))}/>

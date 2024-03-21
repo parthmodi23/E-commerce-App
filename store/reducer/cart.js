@@ -1,4 +1,5 @@
 import CartItem from "../../Model/cartItem";
+import { DELETE_PRODUCT } from "../actions/productaction";
 const initialState={
     products:{},
     totalAmount:0,
@@ -74,12 +75,24 @@ export default (state=initialState,action)=>{
                 return{
                     ...state,
                     products:allnewproducts,
-                    totalAmount:(state.totalAmount-(productdata.quantity*productdata.productPrice))
+                    totalAmount:Math.round((state.totalAmount-(productdata.quantity*productdata.productPrice))*100/100)
                 }
 
             case 'ADD_ORDER':
                 return initialState
-            
+            case 'DELETE_PRODUCT':
+                let myproductid=action.payload.productid
+                if(!state.products[myproductid]){
+                    return state
+                }
+                let itemtotal=state.products[myproductid].sum
+                let newproductcart={...state.products}
+                delete newproductcart[myproductid]
+                return{
+                    ...state,
+                    products:newproductcart,
+                    totalAmount:state.totalAmount -itemtotal
+                }
             default:
                 return state
 

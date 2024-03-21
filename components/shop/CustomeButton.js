@@ -3,11 +3,10 @@ import { View,Text, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function CustomeButton(props) {
+  //in progrss not completed yet
   return (
-        <TouchableOpacity  style={{...styles.button,...styles}}
-        title={props.title} 
-        onPress={props.onPress}>
-  
+        <TouchableOpacity  style={{...styles.button,...styles}}>
+        <Text>{props.title}</Text>
         </TouchableOpacity>
   )
 }
