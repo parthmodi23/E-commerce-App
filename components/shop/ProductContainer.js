@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
     image: {
         height: '60%',
         width: '100%',
-        alignSelf: 'center',
-        resizeMode: 'contain'
     },
     title: {
         fontFamily: fonts.commonfonts

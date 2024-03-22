@@ -15,7 +15,7 @@ import OrderScreen from './screens/shop/OrderScreen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import UserProductPage from './screens/user/UserProductPage';
 import ImageLoader from './components/shop/testImagecode';
-
+import {thunk} from  'redux-thunk';
 // import CardReducer from './store/reducer/cart'
 enableScreens();
 SplashScreen.preventAutoHideAsync();
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
 });
 
 // Create Redux store
-const mystore = createStore(rootReducer, applyMiddleware(logger)); // Apply logger middleware
+const mystore = createStore(rootReducer, applyMiddleware(thunk,logger)); // Apply logger middleware and thunk also
 
 // App component
 export default function App() {

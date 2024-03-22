@@ -63,6 +63,7 @@ const EditProductPage = (props) => {
     });
   }, [dispatchFormState]);
 
+
   const handleSubmit = useCallback(() => {
     if (!formState.formIsValid) {
       Alert.alert('Wait!', 'Please fill all the input fields.', [{ text: 'Okay', style: 'default' }]);
@@ -75,6 +76,8 @@ const EditProductPage = (props) => {
     }
     props.navigation.goBack();
   }, [dispatch, formState, editableProduct, editProductId]);
+
+
 
   useEffect(() => {
     props.navigation.setOptions({

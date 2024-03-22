@@ -81,7 +81,7 @@ export default (state=initialState,action)=>{
             case 'ADD_ORDER':
                 return initialState
             case 'DELETE_PRODUCT':
-                let myproductid=action.payload.productid
+                let myproductid=action.productId
                 if(!state.products[myproductid]){
                     return state
                 }
@@ -91,7 +91,7 @@ export default (state=initialState,action)=>{
                 return{
                     ...state,
                     products:newproductcart,
-                    totalAmount:state.totalAmount -itemtotal
+                    totalAmount:state.totalAmount-itemtotal
                 }
             default:
                 return state

@@ -37,7 +37,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-around',
         margin:5
-
+        
     },
     ordertime:{
         flexDirection:'row',

@@ -34,7 +34,6 @@ const UserProductPage = (props) => {
         props.navigation.setOptions({
 
             headerLeft: () => (
-
                 <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
                     <Item
                         title='menue'

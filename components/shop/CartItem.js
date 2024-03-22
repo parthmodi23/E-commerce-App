@@ -29,7 +29,7 @@ const CartItem = (props) => {
             <Text style={styles.quantitytext}>
                 {props.quantity}
             </Text>
-            <Button title='+' onPress={()=>Dispatch(CartAction.addToCart(props))} />
+        <Button title='+' onPress={()=>Dispatch(CartAction.addToCart(props))} />
         </View>
         </View>
         </View>
@@ -61,13 +61,12 @@ const styles = StyleSheet.create({
     image:{
         height:'100%',
         width:'100%',
-        resizeMode:'cover'
     },
     middlecontainer:{
         flexDirection:'row',
         justifyContent:'flex-start',
         justifyContent:'space-evenly',
-        
+ 
     },
     quantitycontainer:{
         flexDirection:'row',
