@@ -18,7 +18,7 @@ const ProductDitailspage=(props)=>{
             <ProductDetails 
             image={selectedProduct.imageUrl} 
             title={selectedProduct.title}
-            price={selectedProduct.price} 
+            price={+selectedProduct.price} 
             productDetails={selectedProduct.description}
             buttontext={'Add To Cart'}
             buttonpress={()=>{

@@ -23,14 +23,14 @@ const UserProductPage = (props) => {
                     text: 'Yes',
                     style: 'destructive',
                     onPress: () => {
-                        dispatch(productActions.deleteuseritem(id));
+                        dispatch(productActions.deleteProduct(id));
                     },
                 },
             ],
         );
     };
     useEffect(() => {
-       
+
         props.navigation.setOptions({
 
             headerLeft: () => (
@@ -75,8 +75,9 @@ const UserProductPage = (props) => {
         <View style={styles.mainscreen}>
             <FlatList
                 data={userproductdata}
+                keyExtractor={item=>item.id}
                 renderItem={(itemdata) =>
-                    <ProductContainer
+                    <ProductContainer style={styles.productscreen}
                         image={itemdata.item.imageUrl}
                         title={itemdata.item.title}
                         price={itemdata.item.price}
@@ -90,7 +91,7 @@ const UserProductPage = (props) => {
                                 }
                             })
                         }
-                        leftpress={()=>handledelete(itemdata.item.id)}
+                        leftpress={() => handledelete(itemdata.item.id)}
                     />} />
         </View>
     )
@@ -99,8 +100,9 @@ const UserProductPage = (props) => {
 const styles = StyleSheet.create({
     mainscreen: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    },
+    productscreen: {
+
     }
 })
 

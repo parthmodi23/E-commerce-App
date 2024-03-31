@@ -1,85 +1,153 @@
-import React, { useEffect } from "react";
-import { FlatList,View,Text,StyleSheet,Button } from "react-native";
-import { useSelector ,useDispatch} from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, View, Text, StyleSheet, Button, ActivityIndicator, ToastAndroid } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import ProductContainer from "../../components/shop/ProductContainer";
-import { combineTransition } from "react-native-reanimated";
 import * as CartAction from '../../store/actions/cart'
 import * as productsActions from '../../store/actions/productaction';
-import {HeaderButtons, Item } from "react-navigation-header-buttons";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomeHaderButton from "../../components/UI/HeaderButton";
-const ProductOverviewScreen=(props)=>{
-    
-const productdata=useSelector(state=>state.products.availableProducts);
-const Dispatch=useDispatch()
 
-  useEffect(() => {
-    Dispatch(productsActions.fetchProducts());
-  }, [Dispatch]);
 
-useEffect(()=>{
-    props.navigation.setOptions({
-        headerRight:()=> (
-        <View>
-        <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
-        <Item title="cart"
-        iconName="cart"
-        onPress={()=>{
-            props.navigation.navigate({
-                name:'Your Cart'})}}
-        />
-        </HeaderButtons>
-        </View>),
-        headerLeft:()=>{
-            return(
-    <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
-        <Item title="Menu"
-        iconName="menu"
-        onPress={()=>{
-            props.navigation.openDrawer()
-        }}/>
-    </HeaderButtons>
-    )}
-    })
-})
-    return(
-            <FlatList
-            data={productdata}
-            keyExtractor={item=>item.id}
-            renderItem={itemData=>
-            <ProductContainer 
-            image={itemData.item.imageUrl}
-            title={itemData.item.title}
-            price={itemData.item.price} 
-            buttonleft='details'
-            buttonright='Add To Cart'
-            leftpress={()=>{
-                props.navigation.navigate({
-                    name:'ProductDetailspage',
-                    params:{
-                        productId:itemData.item.id,
-                        productTitle:itemData.item.title,
-                    }
-                })
-            }}
-            rigthpress={()=>{
-                Dispatch(CartAction.addToCart(itemData.item))
-            }}
-            
-            />
-        
+const ProductOverviewScreen = (props) => {
+    console.log('LOAD PRODUCT')
+    const [isLoading, SetIsLoading] = useState(false)
+    const [refreshing, setRefreshing] = useState(false)
+    const [error, SetError] = useState('')
+    const productdata = useSelector(state => state.products.availableProducts);
+    const Dispatch = useDispatch()
+
+    //this is for featch a data from firebase and for error we have to load the page
+    const fetchproduct = useCallback(async () => {
+        SetError(null)
+        setRefreshing(true)
+        try {
+            await Dispatch(productsActions.fetchProducts());
+            setRefreshing(false)
         }
+        catch (error) {
+            SetError(error.message)
+        }
+    }, [Dispatch, SetIsLoading,setRefreshing])
+
+
+    useEffect(() => {
+        const willfocusSubscription = props.navigation.addListener('focus', fetchproduct)
+        return () => {
+            if (willfocusSubscription.remove) { // Check if remove method exists
+                willfocusSubscription.remove(); // Remove the listener
+            } }
+    }, [fetchproduct, props.navigation])
+
+    useEffect(() => {
+        SetIsLoading(true)
+        fetchproduct().then(() => {
+            SetIsLoading(false)
+        })
+    }, [Dispatch, fetchproduct]);
+
+
+    useEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => (
+                <View>
+                    <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
+                        <Item title="cart"
+                            iconName="cart"
+                            onPress={() => {
+                                // ToastAndroid.showWithGravity("you press",ToastAndroid.BOTTOM,ToastAndroid.LONG);
+                                props.navigation.navigate({
+                                    name: 'Your Cart'
+                                })
+                            }}
+                        />
+                    </HeaderButtons>
+                </View>),
+            headerLeft: () => {
+                return (
+                    <HeaderButtons HeaderButtonComponent={CustomeHaderButton}>
+                        <Item title="Menu"
+                            iconName="menu"
+                            onPress={() => {
+                                props.navigation.openDrawer()
+                            }} />
+                    </HeaderButtons>
+                )
+            }
+        })
+    }, [])
+    if (error) {
+        return (<View style={styles.indicator}>
+            <Text>Error has been occured!</Text>
+            <Button style={styles.errrobutton}
+             title="Try Again" 
+            onPress={fetchproduct}
+             />
+        </View>)
+    }
+
+    if (isLoading) {
+        return (<View style={styles.indicator}>
+            <ActivityIndicator size="large" color='black' />
+        </View>)
+    }
+
+    if (!isLoading && productdata.length === 0) {
+        return (<View style={styles.indicator}>
+            <Text>No Products are available.</Text>
+            <Text>start adding some!</Text>
+        </View>)
+    }
+    return (
+        <FlatList
+            //for refresing content with pull
+            onRefresh={fetchproduct}
+            refreshing={refreshing}
+            ////
+            data={productdata}
+            keyExtractor={item => item.id}
+            renderItem={itemData =>
+                <ProductContainer
+                    image={itemData.item.imageUrl}
+                    title={itemData.item.title}
+                    price={itemData.item.price}
+                    buttonleft="details"
+                    buttonright="Add To Cart"
+                    leftpress={() => {
+                        props.navigation.navigate({
+                            name: 'ProductDetailspage',
+                            params: {
+                                productId: itemData.item.id,
+                                productTitle: itemData.item.title,
+                            }
+                        })
+                    }}
+                    rigthpress={() => {
+                        Dispatch(CartAction.addToCart(itemData.item))
+                    }}
+
+                />
+
+            }
         />
     )
 }
 
 
-const styles=StyleSheet.create({
-    MainScreen:{
-        flex:1,
-        height:'100%',
-        width:'100%',
-        justifyContent:'center',
-        alignItems:'center'
+const styles = StyleSheet.create({
+    MainScreen: {
+        flex: 1,
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    indicator: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    errrobutton:{
+        marginVertical:5
     }
 })
 

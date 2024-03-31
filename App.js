@@ -12,6 +12,7 @@ import cartReducer from './store/reducer/cart'
 import * as SplashScreen from 'expo-splash-screen';
 import orderReducer from './store/reducer/orders'
 import OrderScreen from './screens/shop/OrderScreen';
+import auth from './store/reducer/auth'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import UserProductPage from './screens/user/UserProductPage';
 import ImageLoader from './components/shop/testImagecode';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   products: ProductReducer,
   cart:cartReducer,
   orders:orderReducer,
+  auth:auth,
 });
 
 // Create Redux store

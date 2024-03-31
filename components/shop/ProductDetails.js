@@ -34,13 +34,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     imageContainer: {
-        height: 300,
+        height: 250,
         width: '100%',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        
     },
     image: {
         height: '100%',
         width: '100%',
+        resizeMode:'contain'
     },
     title: {
         fontSize: 15,

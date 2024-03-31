@@ -57,10 +57,14 @@ const styles = StyleSheet.create({
     imagecontainer:{
         height:100,
         width:100,
+        marginHorizontal:10,
+        resizeMode:'contain',
+        padding:2
     },
     image:{
         height:'100%',
         width:'100%',
+        resizeMode:'contain'
     },
     middlecontainer:{
         flexDirection:'row',

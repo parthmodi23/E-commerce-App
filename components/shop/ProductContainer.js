@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Button, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import fonts from "../../constants/fonts";
+import CustomeButton from "./CustomeButton";
 
 
 const ProductContainer = (props) => {
@@ -13,22 +14,23 @@ const ProductContainer = (props) => {
 
             <View style={styles.mainContainer}>
 
-                {/* <View style={styles.imageContainer}> */}
+                <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: props.image }} />
-                {/* </View> */}
+                </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>{props.title}</Text>
                     <Text style={styles.price}>${props.price}</Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={props.leftpress}>
-                        <Text style={styles.buttonText}>{props.buttonleft}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={props.rigthpress}>
-                        <Text style={styles.buttonText}>{props.buttonright}</Text>
-                    </TouchableOpacity>
-                </View>
+                <CustomeButton style={{...styles.button,}} onPress={props.leftpress}>
+                {props.buttonleft}
+
+</CustomeButton>
+<CustomeButton style={{...styles.button,...styles.buttonText}} onPress={props.rightpress}>
+    {props.buttonright}
+</CustomeButton>
+</View>
             </View>
         </TouchableComponents>
 
@@ -37,8 +39,9 @@ const ProductContainer = (props) => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        margin: 20,
-        height: 300,
+        marginHorizontal:35,
+        marginVertical:20,
+        height:300,
         borderRadius: 10,
         borderWidth: 0.5,
         overflow: 'hidden',
@@ -46,13 +49,15 @@ const styles = StyleSheet.create({
         elevation: 6,
     },
     imageContainer: {
-        height: '60%',
+        height: '65%',
         width: '100%',
         overflow: 'hidden'
     },
     image: {
-        height: '60%',
+        height: '100%',
         width: '100%',
+        resizeMode:'stretch'
+
     },
     title: {
         fontFamily: fonts.commonfonts
@@ -68,7 +73,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
     },
     ViewDetails: {
         backgroundColor: 'red',
@@ -76,23 +80,23 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        margin: 5,
-        zIndex: 5
     },
     button: {
-        padding: 10,
         borderRadius: 5,
-        backgroundColor: '#d64d'
+        backgroundColor: '#d63d',
+        justifyContent:'center',
+        padding:1.4
+      
     },
     buttonText: {
-        color: 'white',
+        color:'black',
         fontFamily: fonts.commonfonts
     },
     textContainer: {
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
+        margin: 5
     }
 })
 

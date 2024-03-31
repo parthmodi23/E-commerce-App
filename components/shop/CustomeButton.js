@@ -1,21 +1,30 @@
 import React from 'react'
-import { View,Text, StyleSheet } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View,Text, StyleSheet,TouchableOpacity } from 'react-native'
 
-export default function CustomeButton(props) {
-  //in progrss not completed yet
+const CustomeButton=(props)=> {
   return (
-        <TouchableOpacity  style={{...styles.button,...styles}}>
-        <Text>{props.title}</Text>
+        <TouchableOpacity onPress={props.onPress} style={{...styles.button,...props.style}}>
+        <Text style={{...styles.text,...props.style}}>{props.children}</Text>
         </TouchableOpacity>
   )
 }
 
-const styles=StyleSheet.create({
-    button:{
-        flex:1,
-        width:'30%',
-        height:50,
-        backgroundColor:'green'
-    }
+const  styles = StyleSheet.create({
+
+  button:{
+    backgroundColor:'lightgreen',
+    height:40,
+    width:'30%'
+  },
+  text:{
+    padding:2,
+    justifyContent:'center',
+    textAlign:'center',
+
+    fontFamily:fonts.commonfonts,
+
+  }
 })
+
+
+export default CustomeButton;
